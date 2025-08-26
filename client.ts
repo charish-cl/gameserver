@@ -227,3 +227,4 @@ const  b = { x: 0 }
 
 b.x = 1;
 console.log(b.x);
+

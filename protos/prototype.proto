@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+enum ProtocolType {
+  None = 0;
+
+  LOGIN_REQUEST = 10001;
+  LOGIN_RESPONSE = 10002;
+  CHAT_NOTIFY = 10003;
+  CHAT_REQUEST = 10004;
+  CHAT_RESPONSE = 10005;
+}

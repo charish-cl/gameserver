@@ -1,6 +1,7 @@
 ﻿import { prop, getModelForClass } from '@typegoose/typegoose';
 import { ObjectId } from 'mongodb';
-import mongoose from 'mongoose'; // 添加 mongoose 核心库
+import mongoose from 'mongoose';
+import config from "./config/config"; // 添加 mongoose 核心库
 
 // 位置类（保持不变）
 class Position {
@@ -38,7 +39,7 @@ const PlayerModel = getModelForClass(Player);
 // ============= 数据库连接部分 =============
 async function connectDB() {
     try {
-        let db = await mongoose.connect('mongodb://localhost:27017/GameData', {
+        let db = await mongoose.connect(config.db.uri, {
             // useNewUrlParser: true,
             // useUnifiedTopology: true,
         });
@@ -59,21 +60,9 @@ async function main() {
         name: 'ShadowHunter',
         position: { x: 100, y: 200 }
     });
-
     // 调用实例方法
     newPlayer.levelUp();
     await newPlayer.save();
-
-    return;
-    // 更新
-    // await PlayerModel.updateOne(
-    //     { _id: newPlayer._id },
-    //     { $set: { 'position.x': 150 } }
-    // );
-    // console.log("✅ 玩家位置更新成功")
-    //
-    // // 删除
-    // await PlayerModel.deleteOne({ _id: newPlayer._id });
 }
 
 async function allLevelUp() {
